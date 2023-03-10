@@ -1,13 +1,13 @@
 -- TPC-DS_query8
 select  s_store_name
-      ,sum(ss_net_profit)
- from store_sales
-     ,date_dim
-     ,store,
+      ,sum(ss_net_profit) profit
+ from {{ source('tpcds_sf10tcl', 'store_sales') }}  
+     ,{{ source('tpcds_sf10tcl', 'date_dim') }}  
+     ,{{ source('tpcds_sf10tcl', 'store') }}  ,
      (select ca_zip
      from (
       SELECT substr(ca_zip,1,5) ca_zip
-      FROM customer_address
+      FROM {{ source('tpcds_sf10tcl', 'customer_address') }}
       WHERE substr(ca_zip,1,5) IN (
                           '10338','56623','51423','26456','19500','65832',
                           '17178','68879','49935','49849','93956',
@@ -92,7 +92,7 @@ select  s_store_name
      intersect
       select ca_zip
       from (SELECT substr(ca_zip,1,5) ca_zip,count(*) cnt
-            FROM customer_address, customer
+            FROM {{ source('tpcds_sf10tcl', 'customer_address') }} , {{ source('tpcds_sf10tcl', 'customer') }} 
             WHERE ca_address_sk = c_current_addr_sk and
                   c_preferred_cust_flag='Y'
             group by ca_zip

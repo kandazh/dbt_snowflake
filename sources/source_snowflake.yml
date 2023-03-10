@@ -24,3 +24,36 @@ sources:
           - name: v
             tests:
               - not_null
+
+  - name: tpcds_sf10tcl
+    description: >
+      Fivetran replicated sources for ChowNow's Managed Delivery Service (MDS),
+      formerly "DMS" and not to be confused with AWS DMS.
+    database: snowflake_sample_data
+    schema: tpcds_sf10tcl
+    tables:
+      - name: catalog_page
+      - name: household_demographics
+      - name: call_center
+      - name: date_dim
+      - name: time_dim
+      - name: promotion
+      - name: customer_demographics
+      - name: store_returns
+      - name: store
+      - name: reason
+      - name: warehouse
+      - name: catalog_returns
+      - name: web_returns
+      - name: item
+      - name: inventory
+      - name: catalog_sales
+      - name: store_sales
+      - name: ship_mode
+      - name: income_band
+      - name: dbgen_version
+      - name: customer
+      - name: web_page
+      - name: web_sales
+      - name: web_site
+      - name: customer_address
