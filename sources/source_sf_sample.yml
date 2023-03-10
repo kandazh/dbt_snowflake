@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+
+  # for fivetran managed delivery service (mds) sources
+
+  # for organization purposes, source resources should be defined alphabetically.
+  # at a bare minimum a source should have a name, thoughtful description
+  # and relevant schema test(s)
+  # documentation on additional source properties can be found here
+  # https://docs.getdbt.com/reference/source-properties
+
+  - name: weather_source
+    description: >
+      Fivetran replicated sources for ChowNow's Managed Delivery Service (MDS),
+      formerly "DMS" and not to be confused with AWS DMS.
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: WEATHER
+    tables:
+      - name: DAILY_14_TOTAL
+        description: >
+           Delivery trip information for managed delivery couriers
+        columns:
+          - name: v
+            tests:
+              - not_null
