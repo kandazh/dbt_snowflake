@@ -1,0 +1,1 @@
+select * from {{ source('weather_source', 'DAILY_14_TOTAL') }} limit 10
